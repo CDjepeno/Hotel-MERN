@@ -25,9 +25,9 @@ export const addRoom =  (req, res) => {
 
 export const updateRoom = (req,res) => {
     RoomModel
-        .findByIdAndUpdate(req.params.id, req.body)
-        .then(() => {
-            res.status(201).json('La chambre à bien été modifier')
+    .findByIdAndUpdate(req.params.id, req.body)
+    .then(() => {
+        res.status(201).json('La chambre à bien été modifier')
         })
         .catch((error) => {
             res.status(400).send(error)

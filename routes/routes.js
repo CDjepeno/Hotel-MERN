@@ -2,7 +2,11 @@ import express from 'express'
 import {config} from '../Docs-API/docs-config.js'
 import {server} from '../Docs-API/docs-config.js'
 import {getRooms,deleteRooms,getOneRoom,updateRoom,addRoom} from '../controllers/roomControllers.js'
-
+// Path with ES module
+import path, { dirname } from 'path'
+import { fileURLToPath } from 'url'
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 const router = express.Router()
 const app = express()

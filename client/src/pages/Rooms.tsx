@@ -1,14 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import  Layout  from '../components/CDLayout';
+import RoomService from '../services/roomsAPI';
+import RoomCard from '../components/RoomCard'
+import { Link } from 'react-router-dom'
 
-type Props = {
-    text: string
+export type RoomType = {
+    _id: string,
+    name: string,
+    maxPersons: number
 }
 
-export const Rooms: React.FC<Props> = ( { text } ) => {
+export const Rooms: React.FC = () => {
+
+    const [rooms, setRooms] = useState<RoomType[]>([]) 
+
+    const fetchData = () => {
+        RoomService.getRooms()
+        .then(rooms => {
+            setRooms(rooms)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+
+    }
+
+    useEffect(() => {
+        fetchData()
+    },[])
+
+    console.log(rooms)
+    
     return (<>
         <Layout>
-            <h1>CHAMBRES</h1>
+            {rooms.map(room => (
+                <Link key={room._id} to={`/rooms/${room._id}`}>
+                    <RoomCard room={room}/>
+                </Link>
+             ) )}
         </Layout>
     </>)
 }
