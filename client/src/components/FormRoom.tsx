@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Form, Input, Checkbox } from 'antd';
 import Button from "antd-button-color";
 import RoomService from '../services/roomsAPI';
+import { useHistory } from 'react-router';
 
 
 const layout = {
@@ -46,6 +47,13 @@ export const FormRoom: React.FC<Props>= ({id, room, setRoom}) => {
     console.log('Failed:', errorInfo);
   };
 
+  const history = useHistory()
+  
+  const handleDelete = () => {
+    RoomService.deleteRoom(id)
+    history.replace('/')
+  }
+
   if(!values) return null
 
   return (
@@ -87,7 +95,7 @@ export const FormRoom: React.FC<Props>= ({id, room, setRoom}) => {
         <Button type="primary" htmlType="submit">
           Submit
         </Button>
-        <Button type="danger" style={{ marginLeft : '1rem' }}>
+        <Button type="danger" style={{ marginLeft : '1rem' }} onClick={handleDelete}>
             Supprimer
         </Button>
       </Form.Item>

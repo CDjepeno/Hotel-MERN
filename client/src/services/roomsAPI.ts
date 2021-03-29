@@ -30,6 +30,13 @@ export default class RoomService {
         .catch(error => this.handleError(error));
     }
 
+    static deleteRoom(id: any) {
+        return axios
+        .delete(ROOM_API + id)
+        .then(response => response.data)
+        .catch(error => this.handleError(error));
+    }
+
     // static addobject(object: object): Promise<object> {
     //     return axios
     //     .post(url, {
@@ -39,11 +46,7 @@ export default class RoomService {
     //     .catch(error => this.handleError(error))
     // }
 
-    // static deleteobject(id) {
-    //     return axios
-    //     .delete(url + '/' + id)
-    // }
-
+    
     static isEmpty(data: Object): boolean {
         return Object.keys(data).length === 0;
     }
