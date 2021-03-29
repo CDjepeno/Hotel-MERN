@@ -32,6 +32,9 @@ const CDLayout : React.FC<CDLayoutProps> = ({ children }) => {
                     <Menu.Item key='4'>
                        <Link to='/contact'>Contact</Link> 
                     </Menu.Item>
+                    <Menu.Item key='5'>
+                       <Link to='/addRoom'>Ajouter une chambre</Link> 
+                    </Menu.Item>
                 </Menu>
             </Header>
             <Content style={contentStyle} children={children} />

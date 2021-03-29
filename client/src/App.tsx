@@ -2,6 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import { About } from './pages/About';
+import AddRoom from './pages/AddRoom';
 import { Contact } from './pages/Contact';
 import Home from './pages/home';
 import { PageNotFound } from './pages/PageNotFound';
@@ -17,6 +18,7 @@ const App : React.FC = () => {
         <Route path='/rooms/:id' component={Room} />
         <Route path='/contact' component={Contact} />
         <Route path='/about' component={About} />
+        <Route path='/addRoom' component={AddRoom} />
         <Route component={PageNotFound} />
       </Switch>
     </Router>

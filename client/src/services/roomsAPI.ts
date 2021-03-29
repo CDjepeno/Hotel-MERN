@@ -37,14 +37,14 @@ export default class RoomService {
         .catch(error => this.handleError(error));
     }
 
-    // static addobject(object: object): Promise<object> {
-    //     return axios
-    //     .post(url, {
-    //     ...object,
-    //     })
-    //     .then(response => response.data)
-    //     .catch(error => this.handleError(error))
-    // }
+    static addRoom(object: RoomType): Promise<object> {
+        return axios
+        .post(ROOMS_API, {
+        ...object,
+        })
+        .then(response => response.data)
+        .catch(error => this.handleError(error))
+    }
 
     
     static isEmpty(data: Object): boolean {
