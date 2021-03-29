@@ -19,14 +19,16 @@ export default class RoomService {
         .catch(error => this.handleError(error));
     }
 
-    // static putobject(object: object, id): Promise<Object> {
-    //     return axios
-    //     .put(url + '/' + id 
-    //     , {
-    //          ...object,
-    //         object: object
-    //     })
-    // }
+    static upddateRoom(object: RoomType, id: string): Promise<Object> {
+        return axios
+        .put(ROOM_API + id 
+        , {
+             ...object,
+            object: object
+        })
+        .then(response => response.data)
+        .catch(error => this.handleError(error));
+    }
 
     // static addobject(object: object): Promise<object> {
     //     return axios

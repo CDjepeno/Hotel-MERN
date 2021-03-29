@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Input, Checkbox } from 'antd';
 import Button from "antd-button-color";
+import RoomService from '../services/roomsAPI';
 
 
 const layout = {
@@ -18,6 +19,7 @@ type Props = {
         name: string,
         maxPersons: number
     }
+    setRoom: any
 }
 
 type FormType = { 
@@ -25,7 +27,7 @@ type FormType = {
   maxPersons: any
 }
 
-export const FormRoom: React.FC<Props>= ({id, room}) => {
+export const FormRoom: React.FC<Props>= ({id, room, setRoom}) => {
   const [values, setValues] = useState<FormType|null>(null)
 
   useEffect(() => {
@@ -35,7 +37,9 @@ export const FormRoom: React.FC<Props>= ({id, room}) => {
   },[room,id])
 
   const onFinish = (values: any) => {
-    console.log('Success:', values);
+    RoomService.upddateRoom(values,id)
+    .then(response => console.log(response))
+    .then(setRoom(values))
   };
 
   const onFinishFailed = (errorInfo: any) => {
