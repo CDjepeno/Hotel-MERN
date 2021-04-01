@@ -8,6 +8,12 @@ const RoomSchema = new mongoose.Schema({
         lowercase: true,
         unique: true
     },
+    price: {
+        type: Number,
+        required: true,
+        trim: true,
+        lowercase: true,
+    },
     maxPersons: {
         type: Number,
         default: 1,

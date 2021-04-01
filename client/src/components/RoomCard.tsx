@@ -7,6 +7,7 @@ export interface RoomCardProps {
     room: {
         _id: string,
         name: string,
+        price: number,
         maxPersons: number
     } 
 }
@@ -29,7 +30,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
                         />
                     }
                 >  
-                    <Meta title={room.name.toUpperCase()} description={`Nombre de personnes maximum : ${room.maxPersons}`} />
+                    <Meta title={`${room.price} € / nuits `} description={`Nombre de personnes maximum : ${room.maxPersons}`} />
                 </Card>
             </Badge>
         </div>

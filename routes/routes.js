@@ -5,12 +5,16 @@ import {getRooms,deleteRooms,getOneRoom,updateRoom,addRoom} from '../controllers
 // Path with ES module
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const router = express.Router()
 const app = express()
 
+/**
+ * Documentation API
+ */
 router.use('/api-docs', server, config)
 
 
@@ -56,7 +60,7 @@ router.get('/api/rooms', getRooms)
  * @swagger
  * /rooms:
  *  post:
- *     description: post room
+ *     description: add room
  *     parameters:
  *     - name: name
  *       description: name of the room
@@ -96,5 +100,9 @@ router.post('/api/rooms', addRoom)
  *            description: Success
  */
  router.delete('/api/rooms/:id', deleteRooms)
+
+//  router.get('/*', (_,res) => {
+//     res.sendFile(path.join(__dirname,'../client/build/index.html'))
+//  })
 
 export default router

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Input, Checkbox } from 'antd';
+import { Form, Input } from 'antd';
 import Button from "antd-button-color";
 import RoomService from '../services/roomsAPI';
 import { useHistory } from 'react-router';
@@ -18,18 +18,19 @@ type Props = {
     room?: { 
         _id: string,
         name: string,
+        price: number,
         maxPersons: number
     }
-    setRoom?: any
     addRoom?: boolean
 }
 
 type FormType = { 
-  name: any,
-  maxPersons: any
+  name: string,
+  price: number,
+  maxPersons: number
 }
 
-export const FormRoom: React.FC<Props>= ({id, room, setRoom, addRoom}) => {
+export const FormRoom: React.FC<Props>= ({id, room, addRoom}) => {
   const [values, setValues] = useState<FormType|null>(null)
   const history = useHistory()
   
@@ -37,10 +38,9 @@ export const FormRoom: React.FC<Props>= ({id, room, setRoom, addRoom}) => {
     setValues(room ? room : null)     
   },[room,id])
 
-  if(!id) return null
 
   const onFinish = (values: any) => {
-    if(!addRoom) {
+    if(!addRoom && id) {
       RoomService.upddateRoom(values,id)
      .then(response => console.log(response))
     }else {
@@ -79,6 +79,19 @@ export const FormRoom: React.FC<Props>= ({id, room, setRoom, addRoom}) => {
         <Input 
           value={values.name} 
           name='name' 
+          onChange={(e) => setValues({...values, name:e.target.value})}
+        />
+      </Form.Item>
+
+      <Form.Item
+        label="Prix"
+        name="price"
+        initialValue={values.price}
+        rules={[{ required: true, message: 'Veuillez entré le prix de la chambre!' }]}
+      >
+        <Input 
+          value={values.price} 
+          name='price' 
           onChange={(e) => setValues({...values, name:e.target.value})}
         />
       </Form.Item>

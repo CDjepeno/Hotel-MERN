@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 export type RoomType = {
     _id: string,
     name: string,
+    price: number,
     maxPersons: number
 }
 
@@ -25,12 +26,12 @@ export const Rooms: React.FC = () => {
     },[])
     
     return (<>
-        <Layout>
-            {rooms.map(room => (
+        <Layout>     
+            {rooms && rooms.map(room => (
                 <Link key={room._id} to={`/rooms/${room._id}`}>
                     <RoomCard room={room}/>
                 </Link>
-             ) )}
+            ) )}
         </Layout>
     </>)
 }

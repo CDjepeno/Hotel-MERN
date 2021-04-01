@@ -29,7 +29,7 @@ export const Room: React.FC<RouteComponentProps<Params>> = ( ) => {
                 <div>
                     <RoomCard room={room}/>
                     <h1>Editer</h1>
-                    <FormRoom id={id} room={room} setRoom={setRoom}/>
+                    <FormRoom id={id} room={room} />
                 </div>
             : 
                 <h1>Aucune chambre trouver</h1>
