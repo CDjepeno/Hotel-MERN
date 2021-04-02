@@ -2,6 +2,8 @@ import express from 'express'
 import {config} from '../Docs-API/docs-config.js'
 import {server} from '../Docs-API/docs-config.js'
 import {getRooms,deleteRooms,getOneRoom,updateRoom,addRoom} from '../controllers/roomControllers.js'
+import {register, login, logout} from '../controllers/userController.js'
+import { auth } from '../auth/auth.js'
 // Path with ES module
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
@@ -22,84 +24,21 @@ router.get('/', (_,res) => {
     res.send('home page')
 })
 
-/**
- * @swagger
- * /rooms:
- *    get:
- *      description: Get all rooms
- *      responses: 
- *          '200': 
- *            description: Success
- */
-router.get('/api/rooms', getRooms)
+router.get('/api/rooms',auth, getRooms)
 
-/**
- * @swagger
- * /rooms/:id:
- *       put:
- *         description: update room
- *         parameters:
- *         - name: name
- *           description: name of the room
- *           in: formData
- *           required: true
- *           type: String
- *         - name: maxPersons
- *           description: person number
- *           in: formData
- *           required: true
- *           type: Number
- *         responses: 
- *             '200': 
- *               description: Success
- */
- router.put('/api/rooms/:id', updateRoom)
+router.put('/api/rooms/:id',auth, updateRoom)
 
+router.post('/api/rooms',auth, addRoom)
 
-/**
- * @swagger
- * /rooms:
- *  post:
- *     description: add room
- *     parameters:
- *     - name: name
- *       description: name of the room
- *       in: formData
- *       required: true
- *       type: String
- *     - name: maxPersons
- *       description: person number
- *       in: formData
- *       required: true
- *       type: Number
- *     responses: 
- *         '201': 
- *           description: Success
- */
-router.post('/api/rooms', addRoom)
+router.post('/api/register',auth, register)
 
-/**
- * @swagger
- * /rooms/:id:
- *    put:
- *      description: get room
- *      responses: 
- *          '200': 
- *            description: Success
- */
- router.get('/api/rooms/:id', getOneRoom)
+router.post('/api/login', login)
 
+router.get('/api/rooms/:id', auth, getOneRoom)
 
-/**
- * @swagger
- * /rooms/:id:
- *    delete:
- *      description: delete room
- *      responses: 
- *          '200': 
- *            description: Success
- */
- router.delete('/api/rooms/:id', deleteRooms)
+router.get('/api/logout',auth, logout)
+
+router.delete('/api/rooms/:id', auth, deleteRooms)
 
 //  router.get('/*', (_,res) => {
 //     res.sendFile(path.join(__dirname,'../client/build/index.html'))
