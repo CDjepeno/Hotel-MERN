@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { RouteComponentProps, useParams } from 'react-router';
 import  Layout  from '../components/CDLayout';
-import { FormRoom } from '../components/FormRoom';
+import { FormUpdateRoom } from '../components/FormUpdateRoom';
 import RoomCard from '../components/RoomCard';
 import RoomService from '../services/roomsAPI';
 import {RoomType} from './Rooms'
@@ -29,7 +29,7 @@ export const Room: React.FC<RouteComponentProps<Params>> = ( ) => {
                 <div>
                     <RoomCard room={room}/>
                     <h1>Editer</h1>
-                    <FormRoom id={id} room={room} />
+                    <FormUpdateRoom id={id} room={room} />
                 </div>
             : 
                 <h1>Aucune chambre trouver</h1>

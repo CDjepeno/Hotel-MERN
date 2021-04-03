@@ -17,8 +17,8 @@ export const Rooms: React.FC = () => {
 
     const fetchData = () => {
         RoomService.getRooms()
-        .then(rooms => setRooms(rooms))
-        .catch((err) => console.log(err))
+            .then(rooms => setRooms(rooms))
+            .catch((err) => console.log(err))
     }
 
     useEffect(() => {

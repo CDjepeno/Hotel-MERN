@@ -12,7 +12,7 @@ const app = express()
  * Middlewares
  */
 app
-    .use(express.static('client/build'))
+    // .use(express.static('client/build'))
     .use(express.json())
     .use(express.urlencoded())
     .use(routes)

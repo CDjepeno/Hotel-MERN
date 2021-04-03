@@ -26,7 +26,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
                                 objectFit: 'cover'
                             }}
                             alt={room.name}
-                            src={`https://source.unsplash.com/random/${Math.ceil(Math.random() * 1000 + 300 )}x350/?bed`}
+                            src={`https://source.unsplash.com/random/${Math.ceil(Math.random() * 1000 + 300 )}x350/?cars`}
                         />
                     }
                 >  

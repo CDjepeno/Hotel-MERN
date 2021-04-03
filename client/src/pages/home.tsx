@@ -1,16 +1,14 @@
 import React from 'react'
 import  Layout  from '../components/CDLayout';
+import { FormLogin } from '../components/FormLogin';
 
-export interface HomeProps {
-    
-}
  
-const Home: React.FC<HomeProps> = () => {
-    return ( 
+const Home: React.FC = () => {
+    return ( <>
         <Layout>
-            <h1>home</h1>
+            <FormLogin />
         </Layout>
-     );
+    </>);
 }
  
 export default Home;

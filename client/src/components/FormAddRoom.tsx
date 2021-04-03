@@ -13,54 +13,45 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-type Props = { 
-    id?: string,
-    room?: { 
-        _id: string,
-        name: string,
-        price: number,
-        maxPersons: number
-    }
-    addRoom?: boolean
-}
+type Field = {
+    value?: any,
+    error?: string,
+};
+
 
 type FormType = { 
-  name: string,
-  price: number,
-  maxPersons: number
+  name: Field,
+  price: Field,
+  maxPersons: Field
 }
 
-export const FormRoom: React.FC<Props>= ({id, room, addRoom}) => {
-  const [values, setValues] = useState<FormType|null>(null)
+export const FormAddRoom: React.FC= () => {
+  const [form, setForm] = useState<FormType>({
+      name: { value: "" },
+      price: { value: "" },
+      maxPersons: { value: "" }
+  })
   const history = useHistory()
-  
-  useEffect(() => {
-    setValues(room ? room : null)     
-  },[room,id])
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const fieldName: string = e.target.name;
+    const fieldValue: string = e.target.value;
+    const newField: Field = { [fieldName]: { value: fieldValue } };
+
+    setForm({ ...form, ...newField});
+  }
 
 
   const onFinish = (values: any) => {
-    if(!addRoom && id) {
-      RoomService.upddateRoom(values,id)
-     .then(response => console.log(response))
-    }else {
       RoomService.addRoom(values)
       .then(response => console.log(response))
       .catch(err => console.error(err))
       history.replace('/rooms')
-    }
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
-
-  const handleDelete = () => {
-    RoomService.deleteRoom(id)
-    history.replace('/rooms')
-  }
-
-  if(!values) return null
 
   return (
     <Form
@@ -73,40 +64,34 @@ export const FormRoom: React.FC<Props>= ({id, room, addRoom}) => {
       <Form.Item
         label="Nom"
         name="name"
-        initialValue={values.name}
         rules={[{ required: true, message: 'Veuillez entré le nom de la chambre!' }]}
       >
         <Input 
-          value={values.name} 
           name='name' 
-          onChange={(e) => setValues({...values, name:e.target.value})}
+          onChange={ handleChange }
         />
       </Form.Item>
 
       <Form.Item
         label="Prix"
         name="price"
-        initialValue={values.price}
         rules={[{ required: true, message: 'Veuillez entré le prix de la chambre!' }]}
       >
         <Input 
-          value={values.price} 
           name='price' 
-          onChange={(e) => setValues({...values, name:e.target.value})}
+          onChange={ handleChange }
         />
       </Form.Item>
 
       <Form.Item
         label="Capacité max"
         name="maxPersons"
-        initialValue={values.maxPersons}
         rules={[{ required: false, message: 'Veuillez entré le nombre de personne!' }]}
       >
         <Input 
-          value={values.maxPersons} 
           type='number' 
           name='maxPersons' 
-          onChange={(e) => setValues({...values, name:e.target.value})}
+          onChange={ handleChange }
         />
       </Form.Item>
 
@@ -114,13 +99,6 @@ export const FormRoom: React.FC<Props>= ({id, room, addRoom}) => {
         <Button type="primary" htmlType="submit">
           Submit
         </Button>
-        {!addRoom ? 
-          <Button type="danger" style={{ marginLeft : '1rem' }} onClick={handleDelete}>
-              Supprimer
-          </Button>
-          :
-          null
-        }
       </Form.Item>
     </Form>
   );
