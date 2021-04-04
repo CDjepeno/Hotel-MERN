@@ -34,7 +34,7 @@ type FormType = {
   password: Field,
 }
 
-export const FormLogin: React.FC= () => {
+export const FormRegister: React.FC= () => {
   const [form, setForm] = useState<FormType>({
       email: {value: ""},
       password: {value: ""}
@@ -53,7 +53,7 @@ export const FormLogin: React.FC= () => {
 
 
   const onFinish = (values: any) => {
-    AuthenticationService.login(values)
+    AuthenticationService.register(values)
     history.replace('/rooms')
   };
 
@@ -69,15 +69,27 @@ export const FormLogin: React.FC= () => {
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
     >
-      <Form.Item
-        label="email"
-        name="email"
-        rules={[{ required: true, message: 'Veuillez entré le nom de la chambre!' }]}
-      >
-        <Input
-          name='email' 
-          onChange={handleChange}
-        />
+        <Form.Item
+            label="Votre nom"
+            name="name"
+            rules={[{ required: true, message: 'Veuillez entré votre nom !' }]}
+        >
+            <Input
+                name='name' 
+                onChange={handleChange}
+            />
+        </Form.Item>
+    
+
+        <Form.Item
+            label="email"
+            name="email"
+            rules={[{ required: true, message: 'Veuillez entré le nom de la chambre!' }]}
+        >
+            <Input
+                name='email' 
+                onChange={handleChange}
+            />
       </Form.Item>
 
       <Form.Item
@@ -86,8 +98,8 @@ export const FormLogin: React.FC= () => {
         rules={[{ required: true, message: 'Veuillez entré le mot de passe !' }]}
       >
         <Input.Password 
-          name='password' 
-          onChange={handleChange}
+            name='password' 
+            onChange={handleChange}
         />
       </Form.Item>
 

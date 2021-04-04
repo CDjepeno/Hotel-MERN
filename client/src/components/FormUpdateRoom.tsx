@@ -14,14 +14,13 @@ const tailLayout = {
 };
 
 type Props = { 
-    id?: string,
-    room?: { 
+    id: string,
+    room: { 
         _id: string,
         name: string,
         price: number,
         maxPersons: number
     }
-    addRoom?: boolean
 }
 
 type FormType = { 
@@ -30,7 +29,7 @@ type FormType = {
   maxPersons: number
 }
 
-export const FormUpdateRoom: React.FC<Props>= ({id, room, addRoom}) => {
+export const FormUpdateRoom: React.FC<Props>= ({id, room}) => {
   const [values, setValues] = useState<FormType|null>(null)
   const history = useHistory()
   
@@ -40,25 +39,14 @@ export const FormUpdateRoom: React.FC<Props>= ({id, room, addRoom}) => {
 
 
   const onFinish = (values: any) => {
-    if(!addRoom && id) {
+    if(id) {
       RoomService.upddateRoom(values,id)
-     .then(response => console.log(response))
-    }else {
-      RoomService.addRoom(values)
-      .then(response => console.log(response))
-      .catch(err => console.error(err))
-      history.replace('/rooms')
     }
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
-
-  const handleDelete = () => {
-    RoomService.deleteRoom(id)
-    history.replace('/rooms')
-  }
 
   if(!values) return null
 
@@ -114,13 +102,6 @@ export const FormUpdateRoom: React.FC<Props>= ({id, room, addRoom}) => {
         <Button type="primary" htmlType="submit">
           Submit
         </Button>
-        {!addRoom ? 
-          <Button type="danger" style={{ marginLeft : '1rem' }} onClick={handleDelete}>
-              Supprimer
-          </Button>
-          :
-          null
-        }
       </Form.Item>
     </Form>
   );

@@ -7,8 +7,10 @@ const AddRoom: React.FC = () => {
 
     return (
         <Layout>
-            <h1>Ajouter</h1>
-            <FormAddRoom/>
+            <div>
+                <h1>Ajouter une chambre</h1>
+                <FormAddRoom/>
+            </div>
         </Layout>  
       );
 }
