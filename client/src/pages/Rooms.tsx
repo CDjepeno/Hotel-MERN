@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import  Layout  from '../components/CDLayout';
 import RoomService from '../services/roomsAPI';
 import RoomCard from '../components/RoomCard'
 import { Link } from 'react-router-dom'
+import AuthContext from '../context/AuthContext';
 
 export type RoomType = {
     _id: string,
@@ -14,6 +15,8 @@ export type RoomType = {
 export const Rooms: React.FC = () => {
 
     const [rooms, setRooms] = useState<RoomType[]>([]) 
+
+    const { isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
 
     const fetchData = () => {
         RoomService.getRooms()

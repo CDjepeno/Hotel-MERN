@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Form, Input } from 'antd';
 import Button from "antd-button-color";
 import { useHistory } from 'react-router';
 import AuthenticationService from '../services/authAPI';
+import AuthContext from '../context/AuthContext';
 
 
 const layout = {
@@ -40,6 +41,8 @@ export const FormLogin: React.FC= () => {
       password: {value: ""}
   })
 
+  const { setIsAuthenticated } = useContext(AuthContext)
+
   const history = useHistory()
   
 
@@ -54,6 +57,7 @@ export const FormLogin: React.FC= () => {
 
   const onFinish = (values: any) => {
     AuthenticationService.login(values)
+    setIsAuthenticated(true)
     history.replace('/rooms')
   };
 
