@@ -1,31 +1,37 @@
 <p align="center"><h1 align="center">
-Hotel_Management API
+Hotel_MERN
 </h1>
 
 <p align="center">
-  Hotel management API
+  Hotel management website
 </p>
 
 <p align="center">
     <img src="https://img.shields.io/badge/Node.js-V.15.11.0-green" alt="Node.js version">
     <img src="https://img.shields.io/badge/Express-V%204.17.1-green" alt="Express version">
-    <img src="https://img.shields.io/badge/Swagger--jsdoc-V%5E7.0.0--rc.6-green" alt="Swagger-jsdoc version">
-    <img src="https://img.shields.io/badge/Swagger--ui--express-V%5E4.1.6-green" alt="swagger-ui-express version">
     <img src="https://img.shields.io/badge/Mongoose-V%5E5.10.7-green" alt="mongoose version">
+  <img src="https://img.shields.io/badge/React-V%2017.0.2-green" alt="react version">
 </p>
 
-![hotel_API](https://user-images.githubusercontent.com/43074465/112665375-483c1f80-8e5b-11eb-90c0-35baf74ff35f.png)
+![hotel_Mern](https://user-images.githubusercontent.com/43074465/113595287-1be18980-9639-11eb-8333-07c74be5d4fb.png)
 
 
-![nodeJS](https://user-images.githubusercontent.com/43074465/112568039-26eb1d00-8de2-11eb-866c-d329ba8f2cf7.png)
-![express-js](https://user-images.githubusercontent.com/43074465/112568044-29e60d80-8de2-11eb-848f-12a64abcc26e.png)
-![mongodb](https://user-images.githubusercontent.com/43074465/112568058-2e122b00-8de2-11eb-9e04-1d3a41848ef9.jpg)
+![MERN](https://user-images.githubusercontent.com/43074465/113595320-23a12e00-9639-11eb-9681-1414ca5f19d8.jpg)
+
 
 
 ## Features
-- Utilisation de swagger docs pour documenter l'api
-- MongoDB
-- CRUD
+# Node.js
+- Gestion des chambres CRUD
+- Authentification JWT Token
+- Sécurisation formulaire
+- Sécurisation des routes avec le token
+
+# React.js
+- Utilisation des hooks
+- Typescript
+- Authentification token
+
 
 ## Getting Started
 ```bash
