@@ -33,11 +33,13 @@ Hotel_MERN
 - Authentification token
 
 
-## Getting Started
+# Getting Started
 ```bash
-$ git clone https://github.com/CDjepeno/Hotel_API-Node.js.git
-$ cd Hotel_API-Node-js
+$ git clone https://github.com/CDjepeno/Hotel-MERN.git
+$ cd Hotel-MERN-js
 $ npm install
-$ npm run dev 
-$ http://localhost:4000/api-docs/
+$ npm run dev
+$ cd Hotel-MERN/client
+$ npm install
+$ npm start 
 ```
