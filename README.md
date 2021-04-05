@@ -20,14 +20,14 @@ Hotel_MERN
 
 
 
-## Features
-# Node.js
+# Features
+### Node.js
 - Gestion des chambres CRUD
 - Authentification JWT Token
 - Sécurisation formulaire
 - Sécurisation des routes avec le token
 
-# React.js
+### React.js
 - Utilisation des hooks
 - Typescript
 - Authentification token
