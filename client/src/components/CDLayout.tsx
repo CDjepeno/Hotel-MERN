@@ -20,29 +20,32 @@ const contentStyle = {
  
 const CDLayout : React.FC<CDLayoutProps> = ({ children }) => {
 
-    const { isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
+    const { isAuthenticatedManager, setIsAuthenticatedManager} = useContext(AuthContext);
+    const { isAuthenticatedUser, setIsAuthenticatedUser} = useContext(AuthContext);
 
     const history = useHistory()
     
     const handleLogout = () => {
         AuthenticationService.logout()
-        setIsAuthenticated(false)
+        setIsAuthenticatedUser(false)
+        setIsAuthenticatedManager(false)
         history.replace('/')
-
     }
 
     return ( 
         <Layout>
             <Header>
                 <Menu theme='dark' mode='horizontal' defaultSelectedKeys={['1']}>
-                    {!isAuthenticated ?
+                    {!isAuthenticatedUser && !isAuthenticatedManager  && 
                         <Menu.Item key='1'>
                         <Link to='/'>Acceuil</Link> 
                         </Menu.Item>
-                    : 
+                    }
+                    {isAuthenticatedUser || isAuthenticatedManager ?
                         <Menu.Item key='2'>
-                        <Link to='/rooms'>Chambres</Link> 
+                            <Link to='/rooms'>Chambres</Link> 
                         </Menu.Item>
+                    :null
                     }
                     <Menu.Item key='3'>
                        <Link to='/about'>A propos</Link> 
@@ -50,21 +53,25 @@ const CDLayout : React.FC<CDLayoutProps> = ({ children }) => {
                     <Menu.Item key='4'>
                        <Link to='/contact'>Contact</Link> 
                     </Menu.Item>
-                    {!isAuthenticated ?
-                        <>
+                    {isAuthenticatedManager ?     
                         <Menu.Item key='5'>
                             <Link to='/addRoom'>Ajouter une chambre</Link> 
                         </Menu.Item>
+                    :null
+                    }
+                    {!isAuthenticatedManager && !isAuthenticatedUser ?
                         <Menu.Item key='5'>
                             <Link to='/register'>S'enregistrer</Link> 
                         </Menu.Item>
-                        </>
-                    :
+                    :null
+                    }
+                    {isAuthenticatedUser || isAuthenticatedManager ?
                         <Menu.Item key='5'>
-                            <Link to='/logout'></Link> 
                             <Button onClick={handleLogout} type="danger">Se déconnecter</Button>
                         </Menu.Item>
-                    }                    
+                    :null
+                    }
+                    
                 </Menu>
             </Header>
             <Content style={contentStyle} children={children} />

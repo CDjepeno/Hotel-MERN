@@ -1,6 +1,9 @@
 import * as React from 'react'
 import { Card, Badge, Image } from 'antd'
-
+import imageRoom1 from '../assets/images/royal.jpg'
+import imageRoom2 from '../assets/images/chambre2.jpg'
+import imageRoom3 from '../assets/images/prince.jpeg'
+import imageRoom4 from '../assets/images/chambre4.jpg'
 const { Meta } = Card
 
 export interface RoomCardProps {
@@ -8,11 +11,26 @@ export interface RoomCardProps {
         _id: string,
         name: string,
         price: number,
-        maxPersons: number
+        maxPersons: number, 
+        image: string
     } 
 }
  
 const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
+ 
+    console.log(room);
+    
+   let imgToPrint;
+   switch(room.image){
+       case "royal.jpg" : imgToPrint = imageRoom1
+       break;
+       case "chambre2.jpg" : imgToPrint = imageRoom2
+       break;
+       case "prince.jpeg" : imgToPrint = imageRoom3
+       break;
+       case "chambre4.jpg" : imgToPrint = imageRoom4
+       break;
+   }
     return ( <>
         <div style={{ width: 300, margin: '1rem' }}>
             <Badge count='PROMO'>
@@ -26,7 +44,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
                                 objectFit: 'cover'
                             }}
                             alt={room.name}
-                            src={`https://source.unsplash.com/random/${Math.ceil(Math.random() * 1000 + 300 )}x350/?cars`}
+                            src={imgToPrint}
                         />
                     }
                 >  

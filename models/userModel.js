@@ -20,6 +20,10 @@ const UserSchema = new mongoose.Schema({
         required: {
             message: 'Le champ password est requis'
         }
+    },
+    role: {
+        type: [String],
+        default: 'user'
     }
 })
 

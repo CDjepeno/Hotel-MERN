@@ -54,7 +54,7 @@ export const FormRegister: React.FC= () => {
 
   const onFinish = (values: any) => {
     AuthenticationService.register(values)
-    history.replace('/rooms')
+    history.replace('/')
   };
 
   const onFinishFailed = (errorInfo: any) => {

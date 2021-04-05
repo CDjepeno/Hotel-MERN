@@ -2,6 +2,8 @@ import * as React from 'react';
 
 
 export default React.createContext({
-    isAuthenticated: false,
-    setIsAuthenticated: (value: any) => {}
+    isAuthenticatedUser: false,
+    setIsAuthenticatedUser: (value: any) => {},
+    isAuthenticatedManager: false,
+    setIsAuthenticatedManager: (value: any) => {}
 })

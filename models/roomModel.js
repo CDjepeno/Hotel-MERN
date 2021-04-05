@@ -14,6 +14,11 @@ const RoomSchema = new mongoose.Schema({
         trim: true,
         lowercase: true,
     },
+    image: {
+        type: String,
+        required: true,
+        lowercase: true,
+    },
     maxPersons: {
         type: Number,
         default: 1,

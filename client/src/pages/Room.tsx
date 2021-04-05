@@ -13,8 +13,9 @@ type Params = { id: string };
 export const Room: React.FC<RouteComponentProps<Params>> = ( ) => {
 
     const [room, setRoom] = useState<RoomType|null>()
+    const [UpdateRoom,setUpdateRoom] = useState(false)
 
-    const { isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
+    const { isAuthenticatedManager } = useContext(AuthContext);
 
     const history = useHistory()
 
@@ -28,7 +29,12 @@ export const Room: React.FC<RouteComponentProps<Params>> = ( ) => {
     const handleDelete = () => {
         RoomService.deleteRoom(id)
         history.replace('/rooms')
-      }
+    }
+
+    const handleUpdate = () => {
+      
+        setUpdateRoom(!UpdateRoom)
+    }
 
     useEffect(() => {
         fetchData()
@@ -39,16 +45,19 @@ export const Room: React.FC<RouteComponentProps<Params>> = ( ) => {
             {room ? 
                 <div>
                     <RoomCard room={room}/>
-                    {/* {!isAuthenticated && 
-                        <> */}
-                            <Button type="primary" style={{ marginLeft : '1rem' }} onClick={handleDelete}>
+                    {isAuthenticatedManager && 
+                        <> 
+                            <Button type="primary" style={{ marginLeft : '1rem' }} onClick={handleUpdate}>
                                 Modifier
                             </Button>
                             <Button type="danger" style={{ marginLeft : '1rem' }} onClick={handleDelete}>
                                 Supprimer
                             </Button>
-                        {/* </>                
-                    } */}
+                            {UpdateRoom &&
+                                <FormUpdateRoom id={id} room={room}/>    
+                            }
+                        </>                
+                    } 
                 </div>
             : 
                 <h1>Aucune chambre trouver</h1>

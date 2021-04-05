@@ -9,17 +9,24 @@ export type RoomType = {
     _id: string,
     name: string,
     price: number,
-    maxPersons: number
+    maxPersons: number,
+    image: string
 }
 
 export const Rooms: React.FC = () => {
 
     const [rooms, setRooms] = useState<RoomType[]>([]) 
 
-    const { isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
+    const { isAuthenticatedManager, setIsAuthenticatedManager} = useContext(AuthContext);
+    const { isAuthenticatedUser, setIsAuthenticatedUser} = useContext(AuthContext);    
+
+    console.log(isAuthenticatedManager);
+    console.log(isAuthenticatedUser);
+    
 
     const fetchData = () => {
-        RoomService.getRooms()
+        RoomService
+            .getRooms()
             .then(rooms => setRooms(rooms))
             .catch((err) => console.log(err))
     }
@@ -29,7 +36,7 @@ export const Rooms: React.FC = () => {
     },[])
     
     return (<>
-        <Layout>     
+        <Layout>  
             {rooms && rooms.map(room => (
                 <Link key={room._id} to={`/rooms/${room._id}`}>
                     <RoomCard room={room}/>

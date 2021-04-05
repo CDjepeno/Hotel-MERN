@@ -34,7 +34,7 @@ export const login = (req, res, next) => {
                     if(isPasswordValid) {
                         const accesstoken = jwt.sign({userId: user._id}, process.env.TOKEN_SECRET, {expiresIn: '24h'})
                         const message = "Connecter"
-                        res.json({message, accesstoken})
+                        res.json({message, accesstoken, user})
                     } else {
                         const message = "Mot de passe invalid"
                         res.status(401).json({ message })

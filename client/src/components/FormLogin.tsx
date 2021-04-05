@@ -41,7 +41,8 @@ export const FormLogin: React.FC= () => {
       password: {value: ""}
   })
 
-  const { setIsAuthenticated } = useContext(AuthContext)
+  const { setIsAuthenticatedUser } = useContext(AuthContext)
+  const { isAuthenticatedManager, setIsAuthenticatedManager} = useContext(AuthContext);
 
   const history = useHistory()
   
@@ -57,7 +58,10 @@ export const FormLogin: React.FC= () => {
 
   const onFinish = (values: any) => {
     AuthenticationService.login(values)
-    setIsAuthenticated(true)
+    setIsAuthenticatedUser(true)
+    if(isAuthenticatedManager) {
+      setIsAuthenticatedManager(true)
+    }
     history.replace('/rooms')
   };
 

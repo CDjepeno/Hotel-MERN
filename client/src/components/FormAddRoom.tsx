@@ -22,14 +22,16 @@ type Field = {
 type FormType = { 
   name: Field,
   price: Field,
-  maxPersons: Field
+  maxPersons: Field,
+  image: Field
 }
 
 export const FormAddRoom: React.FC= () => {
   const [form, setForm] = useState<FormType>({
       name: { value: "" },
       price: { value: "" },
-      maxPersons: { value: "" }
+      maxPersons: { value: "" },
+      image: { value: "" }
   })
   const history = useHistory()
 
@@ -42,7 +44,7 @@ export const FormAddRoom: React.FC= () => {
   }
 
 
-  const onFinish = (values: any) => {
+  const onFinish = (values: any) => {    
       RoomService.addRoom(values)
       .then(response => console.log(response))
       .catch(err => console.error(err))
@@ -92,6 +94,18 @@ export const FormAddRoom: React.FC= () => {
           type='number' 
           name='maxPersons' 
           onChange={ handleChange }
+        />
+      </Form.Item>
+
+      <Form.Item
+        label="photo"
+        name="image"
+        rules={[{ required: false, message: 'Veuillez upload une image!' }]}
+      >
+        <Input 
+          type='text' 
+          name='image' 
+          // onChange={ handleChange }
         />
       </Form.Item>
 
