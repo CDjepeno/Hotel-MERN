@@ -48,7 +48,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
                         />
                     }
                 >  
-                    <Meta title={`${room.price} € / nuits `} description={`Nombre de personnes maximum : ${room.maxPersons}`} />
+                    <Meta title={`${room.price} € / nuit `} description={`Nombre de personnes maximum : ${room.maxPersons}`} />
                 </Card>
             </Badge>
         </div>
