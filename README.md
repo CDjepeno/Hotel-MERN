@@ -13,7 +13,8 @@ Hotel_MERN
   <img src="https://img.shields.io/badge/React-V%2017.0.2-green" alt="react version">
 </p>
 
-![hotel_Mern](https://user-images.githubusercontent.com/43074465/113595287-1be18980-9639-11eb-8333-07c74be5d4fb.png)
+![hotel_mern](https://user-images.githubusercontent.com/43074465/113597857-99f35f80-963c-11eb-88e5-f1c6f330ae7e.png)
+
 
 
 ![MERN](https://user-images.githubusercontent.com/43074465/113595320-23a12e00-9639-11eb-9681-1414ca5f19d8.jpg)
