@@ -18,7 +18,7 @@ export const register = (req,res) => {
 }
 
 
-export const login = (req, res, next) => {
+export const login = (req, res) => {
     const {email , password} = req.body
     
     UserModel
@@ -48,6 +48,6 @@ export const login = (req, res, next) => {
 }
 
 
-export const logout =  (req,res, next) => {
+export const logout =  (_,res) => {
     res.send('deconnexion')
 }

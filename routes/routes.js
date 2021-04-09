@@ -10,7 +10,6 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const router = express.Router()
-const app = express()
 
 router.get('/', (_,res) => {
     res.send('home page')
