@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Form, Input } from 'antd';
 import Button from "antd-button-color";
 import RoomService from '../services/roomsAPI';
@@ -44,11 +44,16 @@ export const FormAddRoom: React.FC= () => {
   }
 
 
-  const onFinish = (values: any) => {    
-      RoomService.addRoom(values)
+  const onFinish = async (values: any) => {    
+
+    try {
+      await RoomService.addRoom(values)
       .then(response => console.log(response))
-      .catch(err => console.error(err))
-      history.replace('/rooms')
+    } catch (error) {
+      console.error(error);
+      
+    }
+    history.replace('/rooms')
   };
 
   const onFinishFailed = (errorInfo: any) => {

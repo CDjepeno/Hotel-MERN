@@ -43,7 +43,7 @@ export const login = (req, res) => {
         })
         .catch(err => {
             const message = "L'utilisateur n'a pas pu être connecter. Réesayer dans quelques instants"
-            res.status(500).json({ message, data: err })
+            return res.status(500).json({ message, data: err })
         })
 }
 

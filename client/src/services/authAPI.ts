@@ -10,13 +10,12 @@ export default class AuthenticationService {
         return axios
             .post(LOGIN_API, credentials)
             .then(response => response.data)
-            .then(data => {                                    
+            .then(data => {                                                    
                 window.localStorage.setItem("authToken", data.accesstoken)
-                this.setAxiosToken(data.accesstoken)
-
                 window.localStorage.setItem("roles", data.user[0].role)
+                this.setAxiosToken(data.accesstoken)
             })
-            .catch(error => console.log(error))
+            .catch(error => this.handleError(error))
     }
 
     static register(user: object) {
@@ -27,26 +26,20 @@ export default class AuthenticationService {
     }
 
     static logout() {
-        window.localStorage.removeItem('authToken')
+        localStorage.removeItem('authToken')
         delete axios.defaults.headers["Authorization"];
-        window.localStorage.removeItem('roles')
-
+        localStorage.removeItem('roles')
     }
 
     static isAuthenticatedUser() {
         const token = window.localStorage.getItem('authToken')
-        const role = window.localStorage.getItem('roles')
-
-        if(role) {
-            console.log(role.split(','));
-        }
+        const role = window.localStorage.getItem('roles')          
         
-        
-        if(token) {
+        if(token) {   
             const jwtData = jwtDecode(token)
 
             if(jwtData.exp > new Date().getTime() / 1000) {
-                if(role && role.split(',').every(a => a === "user")) {
+                if(role && role.split('').every(a => a === "user")) {
                     return true
                 } else {
                     return false
@@ -59,7 +52,7 @@ export default class AuthenticationService {
 
     static isAuthenticatedManager() {
         const token = window.localStorage.getItem('authToken')
-        const role = window.localStorage.getItem('roles')
+        const role = window.localStorage.getItem('roles')        
         
         if(token) {
             const jwtData = jwtDecode(token)
@@ -76,7 +69,7 @@ export default class AuthenticationService {
     }
 
     static setAxiosToken(token: string) {
-        axios.defaults.headers["Authorization"] = "Bearer" + token
+        axios.defaults.headers["Authorization"] = "Bearer " + token
     }
 
     static handleError(error: Error):void {

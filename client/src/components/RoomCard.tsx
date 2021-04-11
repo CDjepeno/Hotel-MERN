@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Card, Badge, Image } from 'antd'
+import { Card, Badge } from 'antd'
 import imageRoom1 from '../assets/images/royal.jpg'
 import imageRoom2 from '../assets/images/chambre2.jpg'
 import imageRoom3 from '../assets/images/prince.jpeg'
@@ -17,9 +17,7 @@ export interface RoomCardProps {
 }
  
 const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
- 
-    console.log(room);
-    
+     
    let imgToPrint;
    switch(room.image){
        case "royal.jpg" : imgToPrint = imageRoom1

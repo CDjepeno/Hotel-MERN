@@ -13,17 +13,6 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-type Props = { 
-    id?: string,
-    room?: { 
-        _id: string,
-        name: string,
-        price: number,
-        maxPersons: number
-    }
-    addRoom?: boolean
-}
-
 type Field = {
     value?: any,
     error?: string,

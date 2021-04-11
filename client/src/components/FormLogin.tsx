@@ -14,17 +14,6 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-type Props = { 
-    id?: string,
-    room?: { 
-        _id: string,
-        name: string,
-        price: number,
-        maxPersons: number
-    }
-    addRoom?: boolean
-}
-
 type Field = {
     value?: any,
     error?: string,
@@ -44,6 +33,7 @@ export const FormLogin: React.FC= () => {
   const { setIsAuthenticatedUser } = useContext(AuthContext)
   const { isAuthenticatedManager, setIsAuthenticatedManager} = useContext(AuthContext);
 
+
   const history = useHistory()
   
 
@@ -56,14 +46,25 @@ export const FormLogin: React.FC= () => {
   }
 
 
-  const onFinish = (values: any) => {
-    AuthenticationService.login(values)
-    setIsAuthenticatedUser(true)
-    if(isAuthenticatedManager) {
-      setIsAuthenticatedManager(true)
+  const onFinish = async (values: any) => {
+    try {
+      await AuthenticationService.login(values)
+      
+      setIsAuthenticatedUser(true)
+      
+      const isAuthenticatedM = await AuthenticationService.isAuthenticatedManager 
+
+      setIsAuthenticatedManager(isAuthenticatedM)          
+        
+      history.push('/rooms')
+      
+    } catch (error) {
+        const message = "Une erreur est survenue"
+         console.log({message});
+         
     }
-    history.replace('/rooms')
   };
+
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);

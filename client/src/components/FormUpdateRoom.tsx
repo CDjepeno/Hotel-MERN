@@ -38,9 +38,14 @@ export const FormUpdateRoom: React.FC<Props>= ({id, room}) => {
   },[room,id])
 
 
-  const onFinish = (values: any) => {
-    if(id) {
-      RoomService.upddateRoom(values,id)
+  const onFinish = async(values: any) => {
+    try {
+      if(id) {
+        await RoomService.upddateRoom(values,id)
+        history.replace("/rooms")
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 

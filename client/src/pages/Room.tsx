@@ -10,16 +10,14 @@ import AuthContext from '../context/AuthContext';
 
 type Params = { id: string };
 
-export const Room: React.FC<RouteComponentProps<Params>> = ( ) => {
+export const Room: React.FC<RouteComponentProps<Params>> = () => {
 
     const [room, setRoom] = useState<RoomType|null>()
     const [UpdateRoom,setUpdateRoom] = useState(false)
-
     const { isAuthenticatedManager } = useContext(AuthContext);
-
+    const { id } = useParams<Params>()    
     const history = useHistory()
 
-    const { id } = useParams<Params>()    
     
     const fetchData = () => {
         RoomService.getRoom(id)
@@ -57,7 +55,7 @@ export const Room: React.FC<RouteComponentProps<Params>> = ( ) => {
                                 <FormUpdateRoom id={id} room={room}/>    
                             }
                         </>                
-                    } 
+                    }  
                 </div>
             : 
                 <h1>Aucune chambre trouver</h1>
