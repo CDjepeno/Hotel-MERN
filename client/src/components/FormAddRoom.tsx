@@ -49,11 +49,11 @@ export const FormAddRoom: React.FC= () => {
     try {
       await RoomService.addRoom(values)
       .then(response => console.log(response))
+      history.replace('/rooms')
     } catch (error) {
       console.error(error);
       
     }
-    history.replace('/rooms')
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -85,6 +85,7 @@ export const FormAddRoom: React.FC= () => {
         rules={[{ required: true, message: 'Veuillez entré le prix de la chambre!' }]}
       >
         <Input 
+          type='number' 
           name='price' 
           onChange={ handleChange }
         />
