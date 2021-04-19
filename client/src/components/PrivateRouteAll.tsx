@@ -4,12 +4,14 @@ import AuthContext from '../context/AuthContext';
 
 type Props = {
     path: any,
-    component: any
+    component: any,
+    exact: any
 }
 
+
 export const PrivateRouteAll:React.FC<Props> = ( { path, component } ) => {
-    const {isAuthenticatedUser} = useContext(AuthContext)
-    const {isAuthenticatedManager} = useContext(AuthContext)
-    return isAuthenticatedUser || isAuthenticatedManager ? (<Route path={path} component={component}/>) : (<Redirect to='/home'/>)
+    const {isAuthenticatedUser} =  useContext(AuthContext)
+    const {isAuthenticatedManager} =  useContext(AuthContext)
+    return isAuthenticatedManager || isAuthenticatedUser  ? (<Route path={path} component={component}/>) : (<Redirect to='/'/>)
 
 }

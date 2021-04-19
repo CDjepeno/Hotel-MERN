@@ -16,17 +16,15 @@ export const Rooms: React.FC = () => {
 
     const [rooms, setRooms] = useState<RoomType[]>([]) 
 
-    const fetchData = () => {
-        RoomService
-            .getRooms()
-            .then(rooms => setRooms(rooms))
-            .catch((err) => console.log(err))
+    const fetchData = async() => {
+        await RoomService
+                .getRooms()
+                .then(rooms => setRooms(rooms))
+                .catch((err) => console.log(err))
     }
 
     useEffect(() => {
-        fetchData()
-        console.log('composant monter');
-        
+        fetchData()        
     },[])
     
     

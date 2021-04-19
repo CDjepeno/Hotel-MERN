@@ -14,6 +14,8 @@ import { Room } from './pages/Room';
 import { Rooms } from './pages/Rooms';
 import AuthenticationService from './services/authAPI';
 
+AuthenticationService.setup()
+
 const App : React.FC = () => {
   const [isAuthenticatedManager, setIsAuthenticatedManager] = useState(AuthenticationService.isAuthenticatedManager())
   const [isAuthenticatedUser, setIsAuthenticatedUser] = useState(AuthenticationService.isAuthenticatedUser())
@@ -29,14 +31,14 @@ const App : React.FC = () => {
     <AuthContext.Provider value={contextValue}>
       <Router>
         <Switch>
-          <Route exact path='/' component={Home} />
-          <Route exact path='/register' component={Register} />
-          <PrivateRouteAll path='/rooms/:id' component={Room} />
-          <PrivateRouteAll path='/rooms' component={Rooms} />
-          <Route path='/contact' component={Contact} />
-          <Route path='/about' component={About} />
-          <PrivateRouteManager path='/addRoom' component={AddRoom} />
-          <Route path='/Layout' component={CDLayout} />
+          <PrivateRouteAll exact path='/rooms/:id' component={Room} />
+          <PrivateRouteAll exact path='/rooms' component={Rooms} />
+          <Route  path='/register' component={Register} />
+          <Route  path='/contact' component={Contact} />
+          <Route  path='/about' component={About} />
+          <PrivateRouteManager exact path='/addRoom' component={AddRoom} />
+          <Route  path='/Layout' component={CDLayout} />
+          <Route  path='/' component={Home} />
           <Route component={PageNotFound} />
         </Switch>
       </Router>

@@ -15,14 +15,12 @@ export default class AuthenticationService {
                 window.localStorage.setItem("roles", data.user[0].role)
                 this.setAxiosToken(data.accesstoken)
             })
-            .catch(error => this.handleError(error))
     }
 
     static register(user: object) {
         return axios
             .post(REGISTER_API, user)
             .then(response => response.data)
-            .catch(err => this.handleError(err))
     }
 
     static logout() {
@@ -39,7 +37,7 @@ export default class AuthenticationService {
             const jwtData = jwtDecode(token)
 
             if(jwtData.exp > new Date().getTime() / 1000) {
-                if(role && role.split('').every(a => a === "user")) {
+                if(role && role === "user") {
                     return true
                 } else {
                     return false
@@ -66,6 +64,17 @@ export default class AuthenticationService {
             }
         }
         return false
+    }
+
+    static setup() {
+        const token = window.localStorage.getItem('authToken')
+
+        if(token) {
+            const jwtData = jwtDecode(token)
+            if(jwtData.exp > new Date().getTime() / 1000) {
+                this.setAxiosToken(token)
+            }
+        }
     }
 
     static setAxiosToken(token: string) {

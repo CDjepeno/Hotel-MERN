@@ -29,6 +29,7 @@ export const FormLogin: React.FC= () => {
       email: {value: ""},
       password: {value: ""}
   })
+  const [message, setMessage] = useState<string>()
 
   const { setIsAuthenticatedUser } = useContext(AuthContext)
   const { isAuthenticatedManager, setIsAuthenticatedManager} = useContext(AuthContext);
@@ -47,21 +48,22 @@ export const FormLogin: React.FC= () => {
 
 
   const onFinish = async (values: any) => {
+	  
     try {
       await AuthenticationService.login(values)
-      
+
       setIsAuthenticatedUser(true)
       
       const isAuthenticatedM = await AuthenticationService.isAuthenticatedManager 
 
       setIsAuthenticatedManager(isAuthenticatedM)          
         
-      history.push('/rooms')
+      history.replace('/rooms')
       
-    } catch (error) {
-        const message = "Une erreur est survenue"
-         console.log({message});
-         
+    } catch (err) {
+		
+        console.log(err.response.data.message)
+		setMessage(err.response.data.message)
     }
   };
 
@@ -78,10 +80,18 @@ export const FormLogin: React.FC= () => {
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
     >
+       {/* Form message */}
+       {message && 
+			<div className="form-group">
+				<div className="card-panel #e71919 lighten-5">
+					{message}
+				</div>
+			</div>
+        }
       <Form.Item
         label="email"
         name="email"
-        rules={[{ required: true, message: 'Veuillez entré le nom de la chambre!' }]}
+        rules={[{ required: true, message: 'Veuillez entré l\'email!' }]}
       >
         <Input
           name='email' 

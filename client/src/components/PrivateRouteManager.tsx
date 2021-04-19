@@ -4,7 +4,8 @@ import AuthContext from '../context/AuthContext';
 
 type Props = {
     path: any,
-    component: any
+    component: any,
+    exact: any
 }
 
 export const PrivateRouteManager:React.FC<Props> = ( { path, component } ) => {
